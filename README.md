@@ -2,7 +2,7 @@
 ## Setup
 This project is supported using Python **3.9.6**
 
-Run following command in the project root directory:
+Run the following command in the project root directory:
 ```
 pip install -r requirements.txt
 ```
@@ -34,7 +34,7 @@ python search_patient.py --patient-id d13874ec-22ea-46ed-a55c-1fd75ef56a58
 ### Development Process
 * Started by reviewing the FHIR resource .ndjson files and researching applicable python packages (fhirclient, fhir.resources, smart-on-fhir)
 * Decided to use fhir.resources package for Patient resource retrieval however not for all resources to overcomplicate solution
-    * serializing the data to fhir.resources model would give extra validation to ensure the provided JSON match the resource model structure
+    * Serializing the data to fhir.resources model would give extra validation to ensure the provided JSON match the resource model structure
 * Implemented logic based on core tasks below:
     1. Retrieve Patient resource entry based on, First/Last name OR Patient Id
     2. Search ALL resources which reference retrieved Patient
