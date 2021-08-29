@@ -20,6 +20,14 @@ python3 search_patient.py --patient-id d13874ec-22ea-46ed-a55c-1fd75ef56a58
 * If all arguments (first-name, last-name, patient-id) are provided application will default to Patient Id search
 
 ## Development Notes
+### Requirements
+* Application will take 3 arguments (first-name, last-name, patient-id)
+    * Must have either (first-name and last-name) OR patient-id
+* Check all resources for entries matching passed patient arguments
+* Print results in following order:
+    * Patient First/Last name
+    * Patient Id
+    * Resource name and number of matching entries in descending order
 ### Assumptions
 * CLI arguments used match on **Patient** resource, since goal to find references to "patient"
 
@@ -32,6 +40,6 @@ python3 search_patient.py --patient-id d13874ec-22ea-46ed-a55c-1fd75ef56a58
     2. Search ALL resources which reference retrieved Patient
     3. Print results which include Patient details and matching resources
 
-### Takeaways
-* Reviewing challenge instructions, I noticed my results did not match 1:1 with the included screenshot. Resources like Practitioner and PractitionerRole had matches however, reviewing the resource entries I did not see specific references to the patient "Cleo27 Bode78". I decided to leave my code as is, since I did not see any references. However I do understand there could be other indirect relationships I am not currently seeing.
+### Takeaway Notes
+* Reviewing the challenge instructions, I noticed my results did not match 1:1 with the included screenshot. Resources like Practitioner and PractitionerRole had matches however, reviewing the resource entries I did not see specific references to the patient "Cleo27 Bode78". I decided to leave my code as is, since I did not see any references. However I do understand there could be other indirect relationships I am not currently seeing.
 
