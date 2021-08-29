@@ -7,8 +7,8 @@ base_resource_dir = 'CodingChallengeData'
 
 #get Patient resource matching CLI patient args
 def get_patient_resource(patient_id, f_name, l_name):
-    patient_resource = f"{base_resource_dir}/Patient.ndjson"
-    for line in open(patient_resource):
+    patient_resource_path = f"{base_resource_dir}/Patient.ndjson"
+    for line in open(patient_resource_path):
         patient = Patient.parse_obj(json.loads(line))
         if patient_id:
             if match_by_id(patient, patient_id):
@@ -61,26 +61,31 @@ def find_resource_matches(patient_id, resource_name):
         entry = json.loads(line)
         patient_val = f"Patient/{patient_id}"
         
+        #check for patient attribute
         patient = entry.get('patient')
         if patient != None:
             reference = patient.get('reference')
             if reference == patient_val:
                 count += 1
+                continue
+        #check for subject attribute
         subject = entry.get('subject')
         if subject != None:
             reference = subject.get('reference')
             if reference == patient_val:
                 count += 1
+                continue
+        #check for target attribute
         target = entry.get('target')
         if target != None:
             for ref in target:
                 reference = ref.get('reference')
                 if reference == patient_val:
                     count += 1
-        
     return count
 
-#find all patient matches to resources return dictionary with resource detailss
+#find all patient matches to resources
+#returns dictionary with (resource_name: #_of_matches)
 def find_all_matches(patient_id):
     fhir_resources = os.listdir(base_resource_dir)
     resource_matches = {}
@@ -93,10 +98,10 @@ def find_all_matches(patient_id):
     return resource_matches
 
 #print final matching results
-def print_results(patient_resource, resource_matches):
-    names = get_official_patient_name(patient_resource)
+def print_results(patient, resource_matches):
+    names = get_official_patient_name(patient)
     print(f"Patient Name: {names[0]} {names[1]}")
-    print(f"Patient Id: {patient_resource.id}\n")
+    print(f"Patient Id: {patient.id}\n")
     print(f"RESOURCE_TYPE {'COUNT'.rjust(15, ' ')}")
     print(f"-----------------------------")
     for resource_name, count in resource_matches:
