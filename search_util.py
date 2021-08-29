@@ -106,7 +106,6 @@ def print_results(patient, resource_matches):
     print(f"-----------------------------")
     for resource_name, count in resource_matches:
         print('{:<20} {:>8}'.format(resource_name, count))
-    print("resource matches: " + str(len(resource_matches)))
 
 #validate UUID based on version 4, citing http://www.hl7.org/FHIR/uuid.profile.json.html
 def is_valid_uuid(patient_id):
